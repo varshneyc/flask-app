@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - pip install -r requirements.txt -t package/
+      - cp app.py lambda_function.py package/
+  build:
+    commands:
+      - cd package && zip -r ../app.zip .
+artifacts:
+  files:
+    - app.zip
+    - appspec.yml
+    - scripts/deploy_lambda.sh
