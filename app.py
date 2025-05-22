@@ -1,9 +1,12 @@
-from flask import Flask
+from flask import Flask, jsonify
+from werkzeug.middleware.proxy_fix import ProxyFix
+from mangum import Mangum
+
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
-@app.route('/')
+@app.route("/")
 def hello():
-    return "Hello from Flask on Lambda!"
+    return jsonify(message="Hello from Flask deployed on Lambda!")
 
-if __name__ == "__main__":
-    app.run()
+lambda_handler = Mangum(app)

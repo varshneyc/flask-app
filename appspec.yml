@@ -3,6 +3,6 @@ Resources:
   - myLambdaFunction:
       Type: AWS::Lambda::Function
       Properties:
-        Name: YOUR_LAMBDA_FUNCTION_NAME
+        Name: chirag-flask-lambda
         Alias: live
         CurrentVersion: 1
